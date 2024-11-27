@@ -1,16 +1,20 @@
-import React from 'react'
-import "./Posts.css"
-import { PostData } from '../../Data/PostsData'
-import Post from '../Post/Post'
-
-export const Posts = () => {
+import React, { useState, useEffect } from "react";
+import "./Posts.css";
+import { getPosts } from "../../Data/PostsData";
+import Post from "../Post/Post";
+const Posts = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const loadedPosts = getPosts();
+    setPosts(loadedPosts);
+  }, []);
   return (
     <div className="Posts">
-        {PostData.map((post, id) =>{
-            return <Post data={post} id={id}/>
-        })}
+      {" "}
+      {posts.map((post, id) => (
+        <Post data={post} key={id} />
+      ))}{" "}
     </div>
-  )
-}
-
-export default Posts
+  );
+};
+export default Posts;
